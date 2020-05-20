@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketImpl;
@@ -16,8 +17,13 @@ public class SocketServidor {
 	public static void main(String[] args) {
 		
 		try {
-			ServerSocket server = new ServerSocket(PORTA);
-			Socket socket = server.accept();
+			ServerSocket server = new ServerSocket(PORTA);  // utiliza uma porta para comunicação com o cliente
+			Socket socket = server.accept();  // aguarda por conexões.
+			
+			InetAddress address = server.getInetAddress();
+			System.out.println("Port: " + server.getLocalPort()); 
+			System.out.println("Host Address: " + address.getHostAddress());
+			System.out.println("Host Name: " + address.getHostName()); 
 			
 			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 			
